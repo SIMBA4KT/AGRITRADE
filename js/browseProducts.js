@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="rating">⭐ ${product.rating}</p>
 
                 <div class="action">
-                    <a href="../pages/product.html" class="btn">View</a>
+                    <a href="../pages/product.html?id=${product.id}" class="btn">View</a>
                     <button class="cart-btn">Cart</button>
                 </div>
             `;

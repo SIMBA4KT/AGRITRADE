@@ -2,8 +2,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(window.location.search);
     const productId = parseInt(params.get("id"));
     console.log("Product ID from URL:", productId);
+    console.log("Product ID:", productId);
 
     if (isNaN(productId)) {
+         window.location.href = "../pages/browseProducts.html";
         console.error("No product ID found in URL!");
         return;
     }

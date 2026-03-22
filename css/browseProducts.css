@@ -11,7 +11,7 @@ body {
     line-height: 1.5;
 }
 
-.marketplace-header {
+.browseProducts-header {
     background: linear-gradient(90deg, #2e7d32, #66bb6a);
     color: #fff;
     padding: 20px 40px;
@@ -24,29 +24,29 @@ body {
     z-index: 100;
 }
 
-.marketplace-header h1 {
+.browseProducts-header h1 {
     font-size: 28px;
     font-weight: 600;
 }
 
-.marketplace-header ul {
+.browseProducts-header ul {
     list-style: none;
     display: flex;
     gap: 25px;
 }
 
-.marketplace-header a {
+.browseProducts-header a {
     color: #fff;
     text-decoration: none;
     font-weight: 500;
     transition: 0.2s ease;
 }
 
-.marketplace-header a:hover {
+.browseProducts-header a:hover {
     color: #c8e6c9;
 }
 
-.marketplace-wrapper {
+.browseProducts-wrapper {
     display: flex;
     gap: 25px;
     padding: 25px;

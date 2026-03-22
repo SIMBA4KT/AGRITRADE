@@ -34,7 +34,7 @@ function loginUser(email, password) {
       if (user) {  localStorage.setItem('loggedInUser', JSON.stringify({ email }));
             alert('Login successful! Welcome, ' + email + '!');
            
-            window.location.href = 'marketPlace.html'; 
+            window.location.href = 'browseProducts.html'; 
       } else {
             alert('Invalid email or password. Please try again.');
       }

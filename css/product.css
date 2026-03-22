@@ -10,7 +10,7 @@ body {
     color: #333;
 }
 
-.marketplace-header {
+.browseProducts-header {
     background: linear-gradient(to right, #2e7d32, #66bb6a);
     color: white;
     padding: 20px 40px;
@@ -19,23 +19,23 @@ body {
     align-items: center;
 }
 
-.marketplace-header h1 {
+.browseProducts-header h1 {
     font-size: 26px;
 }
 
-.marketplace-header ul {
+.browseProducts-header ul {
     list-style: none;
     display: flex;
     gap: 20px;
 }
 
-.marketplace-header a {
+.browseProducts-header a {
     color: white;
     text-decoration: none;
     font-weight: 500;
 }
 
-.marketplace-header a:hover {
+.browseProducts-header a:hover {
     text-decoration: underline;
 }
 

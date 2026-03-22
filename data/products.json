@@ -468,5 +468,38 @@
     "description": "Healthy avocado seeds ready for planting in home gardens or farms.",
     "delivery": "2-3 business days",
     "reviews": []
+  },
+  {
+    "id": 43,
+    "name": "Watermelon",
+    "price": 100,
+    "location": "Eldoret",
+    "category": "crops",
+    "image": "../assets/images/watermelon image.jpg",
+    "description": "High-quality watermelon for planting and growing fresh watermelon.",
+    "delivery": "2-3 business days",
+    "reviews": []
+  },
+  {
+    "id": 44,
+    "name": "Carrot Seeds",
+    "price": 80,
+    "location": "Kisumu",
+    "category": "seeds",
+    "image": "../assets/images/seeds.jpg",
+    "description": "Healthy carrot seeds for planting and growing fresh carrots.",
+    "delivery": "2-3 business days",
+    "reviews": []
+  },
+  {
+    "id": 45,
+    "name": "peach",
+    "price": 90,
+    "location": "Nairobi",
+    "category": "crops",
+    "image": "../assets/images/Peach.jpg",
+    "description": "High-quality peach for planting and growing fresh peach.",
+    "delivery": "2-3 business days",
+    "reviews": []
   }
 ]
