@@ -1,188 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-      <script src="../js/auth.js"></script>
-<script>
-    protectRoute();
-</script>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>MarketPlace</title>
-      <link rel="stylesheet" href="../css/style.css">
-      <link rel="stylesheet" href="../css/marketPlace.css">
+
+    <script src="../js/auth.js"></script>
+    <script>
+        protectRoute();
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTrade | Marketplace</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/marketPlace.css">
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
-      <header class="marketplace-header">
-            <h1>Marketplace</h1>
-            <nav>
-                  <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Marketplace</a></li>
-                        <li><a href="#">Sell</a></li>
-                        <li><a href="#">About</a></li>
-                  </ul>
-            </nav>
-      </header>
-      <div class="marketplace-wrapper">
-            <aside class="sidebar">
-                  <h2>Filters</h2>
-                  <div class="search-bar">
-                        <input type="text" placeholder="Search products...">
-                        <button>Search</button>
-                  </div>
-                  <nav class="filter-categories">
-                        <ul>
-                              <li><a href="#" data-category="all">All Categories</a></li>
-                              <li><a href="#" data-category="crops">Crops</a></li>
-                              <li><a href="#" data-category="livestock">Livestock</a></li>
-                              <li><a href="#" data-category="equipment">Equipment</a></li>
-                              <li><a href="#" data-category="supplies">Supplies</a></li>
-                              <li><a href="#" data-category="seeds">Seeds</a></li>
-                              <li><a href="#" data-category="fertilizers">Fertilizers</a></li>
-                              <li><a href="#" data-category="pesticides">Pesticides</a></li>
-                              <li><a href="#" data-category="tools">Tools</a></li>
-                              <li><a href="#" data-category="other">Other</a></li>
-                        </ul>
-                  </nav>
-                  <div class="price-filter">
-                        <h3>Price Range</h3>
-                        <input type="number" id="minPrice" placeholder="Min Price">
-                        <input type="number" id="maxPrice" placeholder="Max Price">
-                        <button>Apply</button>
-                  </div>
-                  
-            </aside>
-            <main class="product-section">
-                  <h2>Available Products</h2>
-                  <div class="product-list">
 
-                        <div class="product-card crops">
-                              <span class="badge">In stock</span>
-                              <img src="../images/product1.jpg" alt="Fresh Tomatoes">
-                              <h3>Fresh Tomatoes</h3>
-                              <p class="price">KES 150 per kg</p>
-                              <p class="location">📍 Nairobi</p>
-                              <p class="seller">Seller: John Doe</p>
-                              <p class="rating">⭐ 4.5 (100 reviews)</p>
-                              <div class="action">
-                                    <a href="../pages/product.html" class="btn">view details</a>
-                                    <button class="cart-btn">Add to Cart</button>
-                              </div>
-                        </div>
-                        <div class="product-card crops">
-                              <span class="badge">In stock</span>
-                              <img src="../images/product2.jpg" alt="Organic Maize">
-                              <h3>Organic Maize</h3>
-                              <p class="price">KES 80 per kg</p>
-                              <p class="location">📍 Eldoret</p>
-                              <p class="seller">Seller: Jane Smith</p>
-                              <p class="rating">⭐ 4.8 (50 reviews)</p>
-                              <div class="action">
-                                    <a href="../pages/product.html" class="btn">view details</a>
-                                    <button class="cart-btn">Add to Cart</button>
-                              </div>
-                        </div>
-                        <div class="product-card livestock">
-                              <span class="badge">In stock</span>
-                              <img src="../images/product3.jpg" alt="Dairy Cows">
-                              <h3>Dairy Cows</h3>
-                              <p class="price">KES 50,000 each</p>
-                              <p class="location">📍 Nakuru</p>
-                              <p class="seller">Seller: Bob Johnson</p>
-                              <p class="rating">⭐ 4.9 (30 reviews)</p>
-                              <div class="action">
-                                    <a href="../pages/product.html" class="btn">view details</a>
-                                    <button class="cart-btn">Add to Cart</button>
-                              </div>
-                        </div>
-                        <div class="product-card equipment">
-                              <span class="badge">In stock</span>
-                              <img src="../images/product4.jpg" alt="Tractor">
-                              <h3>Tractor</h3>        
-                              <p class="price">KES 1,000,000 each</p>
-                              <p class="location">📍 Eldoret</p>
-                              <p class="seller">Seller: Alice Williams</p>
-                              <p class="rating">⭐ 4.7 (40 reviews)</p>
-                              <div class="action">
-                                    <a href="../pages/product.html" class="btn">view details</a>
-                                    <button class="cart-btn">Add to Cart</button>
-                              </div>
-                        </div>
-                        <div class="product-card supplies">
-                              <span class="badge">In stock</span>
-                              <img src="../images/product5.jpg" alt="Fertilizer">
-                              <h3>Fertilizer</h3>
-                              <p class="price">KES 500 per bag</p>
-                              <p class="location">📍 Kisumu</p>
-                              <p class="seller">Seller: David Brown</p>
-                              <p class="rating">⭐ 4.6 (60 reviews)</p>
-                              <div class="action">
-                                    <a href="../pages/product.html" class="btn">view details</a>
-                                    <button class="cart-btn">Add to Cart</button>
-                              </div>
-                        </div>
-                        <div class="product-card seeds">
-                              <span class="badge">In stock</span>
-                              <img src="../images/product6.jpg" alt="Seeds">
-                              <h3>Avocado Seeds</h3>
-                              <p class="price">KES 200 per packet</p>
-                              <p class="location">📍 Mombasa</p>
-                              <p class="seller">Seller: Emily Davis</p>
-                              <p class="rating">⭐ 4.4 (20 reviews)</p>
-                              <div class="action">
-                                    <a href="../pages/product.html" class="btn">view details</a>
-                                    <button class="cart-btn">Add to Cart</button>
-                              </div>
-                        </div>
-                        <div class="product-card pesticides">
-                              <span class="badge">In stock</span>
-                              <img src="../images/product7.jpg" alt="Pesticides">
-                              <h3>Pesticides</h3>
-                              <p class="price">KES 300 per bottle</p>
-                              <p class="location">📍 Nairobi</p>
-                              <p class="seller">Seller: Emily Davis</p>
-                              <p class="rating">⭐ 4.4 (20 reviews)</p>
-                              <div class="action">
-                                    <a href="../pages/product.html" class="btn">view details</a>
-                                    <button class="cart-btn">Add to Cart</button>
-                              </div>
-                        </div>
-                        <div class="product-card equipment">
-                              <span class="badge">In stock</span>
-                              <img src="../images/product8.jpg" alt="Irrigation Equipment">
-                              <h3>Irrigation Equipment</h3>
-                              <p class="price">KES 50,000 each</p>
-                              <p class="location">📍 Nakuru</p>
-                              <p class="seller">Seller: Bob Johnson</p>
-                              <p class="rating">⭐ 4.9 (30 reviews)</p>
-                              <div class="action">
-                                    <a href="../pages/product.html" class="btn">view details</a>
-                                    <button class="cart-btn">Add to Cart</button>
-                              </div>
-                        </div>
-                        <div class="product-card equipment">
-                              <span class="badge">In stock</span>
-                              <img src="../images/product9.jpg" alt="Farm Machinery">
-                              <h3>Farm Machinery</h3>
-                              <p class="price">KES 1,000,000 each</p>
-                              <p class="location">📍 Eldoret</p>
-                              <p class="seller">Seller: Alice Williams</p>
-                              <p class="rating">⭐ 4.7 (40 reviews)</p>
-                              <div class="action">
-                                    <a href="../pages/product.html" class="btn">view details</a>
-                                    <button class="cart-btn">Add to Cart</button>
-                              </div>
-                        </div>
+<header class="marketplace-header">
+    <h1>🌱 AgriTrade Marketplace</h1>
 
-                        <!-- More product cards can be added here -->
-                  </div>
-            </main>
-      </div>
-      <footer class="footer">
-            <p>@ 2026 AgriTrade | connecting farmers and buyers | all rights reserved
-            </p>
-      </footer>
-      <script src="../js/marketPlace.js"></script>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="#">Marketplace</a></li>
+            <li><a href="#">Sell</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="marketplace-wrapper">
+
+    <aside class="sidebar">
+
+        <h2>Filters</h2>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search products...">
+        </div>
+
+        <nav class="filter-categories">
+            <ul>
+                <li><a href="#" data-category="all">All Categories</a></li>
+                <li><a href="#" data-category="crops">Crops</a></li>
+                <li><a href="#" data-category="livestock">Livestock</a></li>
+                <li><a href="#" data-category="equipment">Equipment</a></li>
+                <li><a href="#" data-category="seeds">Seeds</a></li>
+                <li><a href="#" data-category="fertilizers">Fertilizers</a></li>
+                <li><a href="#" data-category="pesticides">Pesticides</a></li>
+                <li><a href="#" data-category="tools">Tools</a></li>
+                <li><a href="#" data-category="other">Other</a></li>
+            </ul>
+        </nav>
+
+        <div class="price-filter">
+            <h3>Price Range</h3>
+            <input type="number" id="minPrice" placeholder="Min Price">
+            <input type="number" id="maxPrice" placeholder="Max Price">
+            <button id="applyPrice">Apply</button>
+        </div>
+
+    </aside>
+
+    <main class="product-section">
+
+        <h2>Available Products</h2>
+
+        <div id="productList" class="product-list"></div>
+
+    </main>
+
+</div>
+
+
+<footer class="footer">
+    <p>© 2026 AgriTrade | Connecting Farmers & Buyers 🌾</p>
+</footer>
+
+
+
+<script src="../js/marketPlace.js"></script>
 
 </body>
 </html>

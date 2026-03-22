@@ -1,64 +1,104 @@
-const searchInput = document.querySelector('.search-bar input');
-const categoryLinks = document.querySelectorAll('.filter-categories a');
-const applyBtn = document.querySelector('.price-filter button');
+document.addEventListener("DOMContentLoaded", () => {
 
-let currentCategory = "all";
+    let productData = [];
+    let currentCategory = "all";
 
-function filterProducts() {
-    const query = searchInput ? searchInput.value.toLowerCase() : "";
-    const minPrice = parseFloat(document.getElementById('minPrice')?.value) || 0;
-    const maxPrice = parseFloat(document.getElementById('maxPrice')?.value) || Infinity;
+    const productList = document.getElementById('productList');
+    const searchInput = document.getElementById('searchInput');
+    const categoryLinks = document.querySelectorAll('.filter-categories a');
+    const applyBtn = document.getElementById('applyPrice');
+    const minPriceInput = document.getElementById('minPrice');
+    const maxPriceInput = document.getElementById('maxPrice');
 
-    const products = document.querySelectorAll('.product-card');
+    async function loadProducts() {
+        try {
+            const res = await fetch('../data/products.json');
+            productData = await res.json();
 
-    products.forEach(product => {
-        const title = product.querySelector('h3')?.textContent.toLowerCase() || "";
-        const priceText = product.querySelector('.price')?.textContent || "";
+            displayProducts(productData);
+        } catch (err) {
+            console.error(err);
+            productList.innerHTML = "<p>⚠️ Failed to load products</p>";
+        }
+    }
 
-      
-        const match = priceText.match(/KES\s*([\d,]+)/);
-        let price = 0;
+    function displayProducts(products) {
+        productList.innerHTML = "";
 
-        if (match) {
-            price = parseFloat(match[1].replace(/,/g, ''));
+        if (products.length === 0) {
+            productList.innerHTML = "<p>No products found.</p>";
+            return;
         }
 
-        const matchesSearch = title.includes(query);
-        const matchesCategory = currentCategory === "all" || product.classList.contains(currentCategory);
-        const matchesPrice = price >= minPrice && price <= maxPrice;
+        const fragment = document.createDocumentFragment();
 
-        if (matchesSearch && matchesCategory && matchesPrice) {
-            product.style.display = '';
-        } else {
-            product.style.display = 'none';
-        }
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.className = `product-card ${product.category}`;
+
+            card.innerHTML = `
+                <span class="badge">In stock</span>
+
+                <div class="img-wrapper">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+
+                <h3>${product.name}</h3>
+                <p class="price">KES ${product.price.toLocaleString()}</p>
+                <p class="location">📍 ${product.location}</p>
+                <p class="seller">Seller: AgriTrade</p>
+                <p class="rating">⭐ ${product.rating}</p>
+
+                <div class="action">
+                    <a href="../pages/product.html" class="btn">View</a>
+                    <button class="cart-btn">Cart</button>
+                </div>
+            `;
+
+            fragment.appendChild(card);
+        });
+
+        productList.appendChild(fragment);
+    }
+
+ 
+    function filterProducts() {
+        const query = searchInput.value.toLowerCase();
+        const min = parseFloat(minPriceInput.value) || 0;
+        const max = parseFloat(maxPriceInput.value) || Infinity;
+
+        const filtered = productData.filter(p => {
+            return (
+                p.name.toLowerCase().includes(query) &&
+                (currentCategory === "all" || p.category === currentCategory) &&
+                p.price >= min &&
+                p.price <= max
+            );
+        });
+
+        displayProducts(filtered);
+    }
+
+
+    searchInput.addEventListener("input", debounce(filterProducts, 300));
+
+    categoryLinks.forEach(link => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            currentCategory = link.dataset.category;
+            filterProducts();
+        });
     });
-}
 
-if (searchInput) {
-    searchInput.addEventListener('input', filterProducts);
-}
+    applyBtn.addEventListener("click", filterProducts);
 
-categoryLinks.forEach(link => {
-    link.addEventListener('click', function (e) {
-        e.preventDefault();
+    function debounce(fn, delay) {
+        let timeout;
+        return (...args) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => fn(...args), delay);
+        };
+    }
 
-        currentCategory = this.dataset.category;
-        filterProducts();
-    });
-});
-
-if (applyBtn) {
-    applyBtn.addEventListener('click', filterProducts);
-}
-
-document.querySelectorAll('.product-card').forEach(card => {
-    card.addEventListener("mouseenter", () => {
-        card.style.transform = "scale(1.03)";
-        card.style.transition = "0.2s ease";
-    });
-
-    card.addEventListener("mouseleave", () => {
-        card.style.transform = "scale(1)";
-    });
+    loadProducts();
 });
