@@ -1,0 +1,84 @@
+
+    .testimonials-section {
+        padding: 60px 20px;
+        background-color: #f9fdf9;
+        text-align: center;
+    }
+
+    .section-title {
+        color: #03a14a;
+        font-size: 2rem;
+        margin-bottom: 40px;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .testimonial-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .testimonial-card {
+        background: #ffffff;
+        width: 350px;
+        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        position: relative;
+        text-align: left;
+        transition: transform 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .quote-icon {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 4rem;
+        color: #e8f5e9;
+        font-family: serif;
+        line-height: 1;
+    }
+
+    .testimonial-text {
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.6;
+        font-style: italic;
+        margin-bottom: 25px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .client-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .client-photo {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #03a14a;
+    }
+
+    .client-name {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #333;
+        font-weight: 700;
+    }
+
+    .client-role {
+        margin: 2px 0 0 0;
+        font-size: 0.85rem;
+        color: #888;
+    }
