@@ -1,5 +1,5 @@
-<h1>AgriTrade: Unified Marketplace & Service Platform</h1>
-AgriTrade is a comprehensive digital system designed to bridge the gap between clients , service providers, and rural farmers. The platform allows clients to request professional services and purchase goods, while providing a dedicated marketplace for farmers to trade produce directly.
+<h1>AgriTrade: Unified browseProducts & Service Platform</h1>
+AgriTrade is a comprehensive digital system designed to bridge the gap between clients , service providers, and rural farmers. The platform allows clients to request professional services and purchase goods, while providing a dedicated browseProducts for farmers to trade produce directly.
 
 <h2>Key Features </h2>
 <h3>🛒 For Clients (Buyers)</h3>

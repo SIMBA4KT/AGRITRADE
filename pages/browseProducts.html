@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script src="../js/auth.js"></script>
+    <script>
+        protectRoute();
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTrade | browseProducts</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/browseProducts.css">
+
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="browseProducts-header">
+    <h1>🌱 Browse Products</h1>
+
+    <nav>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="#">Browse Products</a></li>
+            <li><a href="#">🔍</a></li>
+            <li><a href="#">🛒</a></li>
+            <li><a href="#">Sell</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#" onclick="logoutUser()">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="browseProducts-wrapper">
+
+    <aside class="sidebar">
+
+        <h2>Filters</h2>
+
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search products...">
+        </div>
+
+        <nav class="filter-categories">
+            <ul>
+                <li><a href="#" data-category="all">All Categories</a></li>
+                <li><a href="#" data-category="crops">Crops</a></li>
+                <li><a href="#" data-category="livestock">Livestock</a></li>
+                <li><a href="#" data-category="equipment">Equipment</a></li>
+                <li><a href="#" data-category="seeds">Seeds</a></li>
+                <li><a href="#" data-category="fertilizers">Fertilizers</a></li>
+                <li><a href="#" data-category="pesticides">Pesticides</a></li>
+                <li><a href="#" data-category="tools">Tools</a></li>
+                <li><a href="#" data-category="other">Other</a></li>
+            </ul>
+        </nav>
+
+        <div class="price-filter">
+            <h3>Price Range</h3>
+            <input type="number" id="minPrice" placeholder="Min Price">
+            <input type="number" id="maxPrice" placeholder="Max Price">
+            <button id="applyPrice">Apply</button>
+        </div>
+
+    </aside>
+
+    <main class="product-section">
+
+        <h2>Available Products</h2>
+
+        <div id="productList" class="product-list"></div>
+
+    </main>
+
+</div>
+
+
+<footer class="footer">
+    <p>© 2026 AgriTrade | Connecting Farmers & Buyers 🌾</p>
+</footer>
+
+
+
+<script src="../js/browseProducts.js"></script>
+
+</body>
+</html>

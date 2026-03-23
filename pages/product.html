@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | AgriTrade</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/product.css">
+</head>
+<body>
+
+
+<header class="browseProducts-header">
+    <h1>🌱 AgriTrade browseProducts</h1>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../pages/browseProducts.html">browseProducts</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<main class="product-detail-wrapper">
+
+    <button class="back-btn" onclick="history.back()">← Back</button>
+    <section class="product-detail">
+        <div class="product-image">
+            <img id="productImg" src="" alt="Product">
+        </div>
+        <div class="product-info">
+            <h2 id="productName"></h2>
+            <p class="price" id="productPrice"></p>
+            <p class="category" id="productCategory"></p>
+            <p class="delivery">Estimated Delivery: <span id="productDelivery"></span></p>
+            <p class="description" id="productDescription"></p>
+            <button class="cart-btn">Add to Cart</button>
+        </div>
+    </section>
+
+   
+    <section class="product-reviews">
+        <h3>User Reviews</h3>
+        <div id="reviewsList">
+           
+        </div>
+        <form id="reviewForm">
+            <h4>Leave a Review</h4>
+            <input type="text" id="reviewerName" placeholder="Your Name" required>
+            <textarea id="reviewText" placeholder="Your review..." required></textarea>
+            <select id="reviewRating">
+                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
+            </select>
+            <button type="submit">Submit Review</button>
+        </form>
+    </section>
+
+   
+    <section class="product-recommendations">
+        <h3>Similar Products</h3>
+        <div id="recommendedProducts" class="product-list">
+           
+        </div>
+    </section>
+
+</main>
+
+<script src="../js/products.js"></script>
+</body>
+</html>
