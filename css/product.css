@@ -255,3 +255,105 @@ body {
         text-align: center;
     }
 }
+.scroll-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  grid-auto-flow: column;
+  grid-auto-columns: 200px;
+  grid-template-rows: repeat(2, auto);
+  gap: 20px;
+  padding: 0px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  height: 300px;
+}
+.product-card {
+  scroll-snap-align: start;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%; 
+}
+.scroll-container::-webkit-scrollbar {
+  height: 20px;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #03a14a;
+  border-radius: 10px;
+}
+
+.image-container {
+  width: 100%;
+  height: 200px; 
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-info {
+  padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  color: #3fb458;
+  margin-bottom: 5px;
+}
+
+.product-description {
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 15px;
+  margin-top: 0px;
+}
+.product-price {
+  font-size: 1rem;
+  color: #4cb35d;
+  font-weight: 700;
+}
+
+    .add-to-cart {
+        width: 100%;
+        padding: 12px;
+        background-color: #03a14a;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-card:hover .image-container img {
+        transform: scale(1.08);
+    }
+
+    .add-to-cart:hover {
+        background-color: #0b7e31;
+    }
+    
+    .add-to-cart:active {
+        transform: scale(0.98);
+    }
