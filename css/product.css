@@ -4,16 +4,15 @@
  /* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));*/
   grid-auto-flow: column;
   grid-auto-columns: 300px;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
   gap: 20px;
   padding: 0px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  height: fit-content;
+  height: fit-content
 }
 .product-card {
-  margin-top: 20px;
   scroll-snap-align: start;
   background: #ffffff;
   border-radius: 16px;
