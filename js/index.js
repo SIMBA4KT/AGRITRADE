@@ -83,21 +83,49 @@ function updateCartIcon() {
     cartIcon.style.transform = 'scale(1.2)';
     setTimeout(() => cartIcon.style.transform = 'scale(1)', 200);
 }
-// "See All" Button Logic ---
-const seeAllBtn = document.querySelector('.view-all-btn');
 
-if (seeAllBtn) {
-    seeAllBtn.addEventListener('click', () => {
-        const browseSection = document.getElementById('BrowseProduce');
-        
-        if (browseSection) {
-            // Smoothly scroll to the "Browse Produce" section
-            browseSection.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start' 
-            });
-        } else {
-            console.warn("Target section #BrowseProduce not found.");
+document.addEventListener('DOMContentLoaded', () => {
+    const viewAllBtn = document.querySelector('.view-all-btn');
+    const scrollContainer = document.querySelector('.scroll-container');
+    const productCards = document.querySelectorAll('.product-card');
+
+    // 1. Navigate to browseProducts page for See All + Browse Produce
+    const browseProduceBtn = document.querySelector('.cta-button2');
+
+    const goToBrowseProducts = () => {
+        window.location.href = 'pages/browseProducts.html';
+    };
+
+    if (viewAllBtn) {
+        viewAllBtn.textContent = 'See All';
+        viewAllBtn.addEventListener('click', goToBrowseProducts);
+    }
+
+    if (browseProduceBtn) {
+        browseProduceBtn.addEventListener('click', goToBrowseProducts);
+    }
+
+    // 2. Add to Cart Logic (Local update)
+    const cartCountElement = document.querySelector('.cart-count');
+    let currentCount = 0;
+
+    scrollContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('add-to-cart')) {
+            currentCount++;
+            if (cartCountElement) {
+                cartCountElement.textContent = currentCount;
+                
+                // Visual feedback on the button
+                const btn = e.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Added';
+                btn.style.backgroundColor = '#27ae60';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.backgroundColor = ''; 
+                }, 1500);
+            }
         }
     });
-}
+});
