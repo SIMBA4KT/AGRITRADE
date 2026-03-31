@@ -15,16 +15,13 @@ function renderProducts(limit = 4) {
     </div>
   `).join('');
 
-  // Hide buttons if everything is displayed
   if (limit === 'all') {
     seeAllBtn.style.display = 'none';
     browseBtn.style.display = 'none';
   }
 }
 
-// Initial render (limited)
 renderProducts(4);
 
-// Event Listeners
 seeAllBtn.addEventListener('click', () => renderProducts('all'));
 browseBtn.addEventListener('click', () => renderProducts('all'));
