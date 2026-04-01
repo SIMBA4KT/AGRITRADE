@@ -88,8 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewAllBtn = document.querySelector('.view-all-btn');
     const scrollContainer = document.querySelector('.scroll-container');
     const productCards = document.querySelectorAll('.product-card');
-
-    // 1. Navigate to browseProducts page for See All + Browse Produce
     const browseProduceBtn = document.querySelector('.cta-button2');
 
     const goToBrowseProducts = () => {

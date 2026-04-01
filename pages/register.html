@@ -13,9 +13,10 @@
             <h2>Create an Account 🌱</h2>
 
             <form id="registerForm">
-                <input type="email" id="regemail" placeholder="Email" required>
+                <p id="message" style="font-size: 0.8rem; margin-bottom: 10px;"></p>
+                <input type="text" id="username" placeholder="Username" required>
                 <input type="password" id="regPassword" placeholder="Password" required>
-                <button type="submit">Register</button>
+                <button type="button" onclick="handleAuth('signup')">Register</button>
             </form>
 
             <p>Already have an account? <a href="login.html">Login here</a></p>
