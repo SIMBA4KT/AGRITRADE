@@ -207,6 +207,7 @@ body {
     text-align: center;
     box-shadow: 0 3px 10px rgba(0,0,0,0.05);
     transition: 0.3s ease;
+    margin-bottom: 20px;
 }
 
 .product-card img {

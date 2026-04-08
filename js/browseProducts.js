@@ -92,6 +92,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     applyBtn.addEventListener("click", filterProducts);
 
+    productList.addEventListener("click", (event) => {
+        const cartBtn = event.target.closest(".cart-btn");
+        if (!cartBtn) return;
+
+        const card = cartBtn.closest(".product-card");
+        if (!card) return;
+
+        const name = card.querySelector("h3")?.innerText.trim() || "";
+        const priceText = card.querySelector(".price")?.innerText || "";
+        const price = parseInt(priceText.replace(/\D/g, "")) || 0;
+        const image = card.querySelector("img")?.getAttribute("src") || "";
+
+        const product = { name, price, image };
+        let cart = JSON.parse(localStorage.getItem("agriCart")) || [];
+        cart.push(product);
+        localStorage.setItem("agriCart", JSON.stringify(cart));
+
+        cartBtn.textContent = "✓ Added";
+        cartBtn.disabled = true;
+        cartBtn.style.backgroundColor = "#27ae60";
+
+        setTimeout(() => {
+            cartBtn.textContent = "Cart";
+            cartBtn.disabled = false;
+            cartBtn.style.backgroundColor = "";
+        }, 1500);
+    });
+
     function debounce(fn, delay) {
         let timeout;
         return (...args) => {

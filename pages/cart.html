@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Your Order - AgriTrade</title>
+    <link rel="stylesheet" href="../css/cart.css">
+</head>
+<body>
+
+<div class="cart-page-container">
+    <h1>Review Your Order</h1>
+    
+    <div id="cart-items-container"></div>
+
+    <div class="cart-summary">
+        <div class="total-info">
+            <p>Total Amount</p>
+            <h3>KES <span id="total-price">0</span></h3>
+        </div>
+        <button id="checkout-btn" class="checkout-btn">Pay with Stripe</button>
+    </div>
+    
+    <div class="navigation-footer">
+        <a href="../pages/browseProducts.html" class="back-to-shop-btn">← Continue Shopping</a>
+    </div>
+</div>
+
+<script src="../js/cart.js"></script>
+</body>
+</html>

@@ -1,122 +1,62 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. Leaf Dropdown Logic ---
+    // --- 1. Navigation & Dropdown Logic ---
     const leafBtn = document.getElementById('leafBtn');
     const dropdownMenu = document.getElementById('dropdownMenu');
     const leafContainer = document.querySelector('.leaf-dropdown');
 
     if (leafBtn && dropdownMenu) {
         leafBtn.addEventListener('click', (e) => {
-            // Prevent the document click listener from firing immediately
             e.stopPropagation(); 
             dropdownMenu.classList.toggle('show');
         });
     }
 
-    // --- 2. Global Click Handler ---
+    // --- 2. Global Click Handler (Dropdowns & Smooth Scroll) ---
     document.addEventListener('click', (event) => {
+        // Close dropdown if clicking outside
         if (leafContainer && !leafContainer.contains(event.target)) {
-            dropdownMenu.classList.remove('show');
+            dropdownMenu?.classList.remove('show');
         }
 
         // Close menu if a dropdown link is clicked
         if (event.target.closest('#dropdownMenu a')) {
-            dropdownMenu.classList.remove('show');
+            dropdownMenu?.classList.remove('show');
         }
 
-        // --- 3. Add to Cart Logic (Event Delegation) ---
-        if (event.target.classList.contains('add-to-cart')) {
+        // Smooth Scroll
+        if (event.target.tagName === 'A' && event.target.getAttribute('href')?.startsWith('#')) {
+            const targetId = event.target.getAttribute('href');
+            if (targetId !== "#") {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    event.preventDefault();
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }
+    });
+
+    // --- 3. Add to Cart Logic (Persistent via LocalStorage) ---
+    document.addEventListener('click', (event) => {
+        if (event.target.classList.contains('add-to-cart') || event.target.classList.contains('btn')) {
             const card = event.target.closest('.product-card');
-            const productName = card.querySelector('.product-name').innerText;
             
-            // Basic Feedback - You can replace this with a toast notification
-            alert(`🛒 ${productName} has been added to your cart!`);
-            
-            // Optional: Update a cart counter if you add one to your header
-            updateCartIcon();
-        }
-    });
+            if (card) {
+                // Capture the actual data
+                const product = {
+                    name: card.querySelector('.product-name').innerText,
+                    price: parseInt(card.querySelector('.product-price').innerText.replace(/\D/g, '')),
+                    image: card.querySelector('img').getAttribute('src')
+                };
 
-    // --- 4. Search Functionality ---
-    const searchInput = document.querySelector('.search-input');
-    if (searchInput) {
-        searchInput.addEventListener('keyup', (e) => {
-            if (e.key === 'Enter') {
-                const query = searchInput.value.toLowerCase();
-                alert(`Searching for: ${query}...`);
-            }
-        });
-    }
+                // Save to LocalStorage
+                let cart = JSON.parse(localStorage.getItem('agriCart')) || [];
+                cart.push(product);
+                localStorage.setItem('agriCart', JSON.stringify(cart));
 
-    //Smooth Scroll for Navigation Links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === "#") return;
-
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                e.preventDefault();
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // --- 6. Email Submission---
-    const footerForm = document.querySelector('.footer-form');
-    if (footerForm) {
-        footerForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = footerForm.querySelector('input').value;
-            if (email) {
-                alert(`Thanks for subscribing, ${email}!`);
-                footerForm.reset();
-            }
-        });
-    }
-});
-function updateCartIcon() {
-    const cartIcon = document.querySelector('a[href="#Cart"]');
-    cartIcon.style.transform = 'scale(1.2)';
-    setTimeout(() => cartIcon.style.transform = 'scale(1)', 200);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const viewAllBtn = document.querySelector('.view-all-btn');
-    const scrollContainer = document.querySelector('.scroll-container');
-    const productCards = document.querySelectorAll('.product-card');
-
-    // 1. Navigate to browseProducts page for See All + Browse Produce
-    const browseProduceBtn = document.querySelector('.cta-button2');
-
-    const goToBrowseProducts = () => {
-        window.location.href = 'pages/browseProducts.html';
-    };
-
-    if (viewAllBtn) {
-        viewAllBtn.textContent = 'See All';
-        viewAllBtn.addEventListener('click', goToBrowseProducts);
-    }
-
-    if (browseProduceBtn) {
-        browseProduceBtn.addEventListener('click', goToBrowseProducts);
-    }
-
-    // 2. Add to Cart Logic (Local update)
-    const cartCountElement = document.querySelector('.cart-count');
-    let currentCount = 0;
-
-    scrollContainer.addEventListener('click', (e) => {
-        if (e.target.classList.contains('add-to-cart')) {
-            currentCount++;
-            if (cartCountElement) {
-                cartCountElement.textContent = currentCount;
-                
-                // Visual feedback on the button
-                const btn = e.target;
+                // Visual Feedback on Button
+                const btn = event.target;
                 const originalText = btn.textContent;
                 btn.textContent = '✓ Added';
                 btn.style.backgroundColor = '#27ae60';
@@ -125,7 +65,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.textContent = originalText;
                     btn.style.backgroundColor = ''; 
                 }, 1500);
+
+                updateCartIcon();
             }
         }
     });
+
+    // --- 4. Redirection Logic ---
+    const viewAllBtn = document.querySelector('.view-all-btn');
+    const browseProduceBtn = document.querySelector('.cta-button2');
+
+    const goToBrowseProducts = () => {
+        window.location.href = 'pages/browseProducts.html';
+    };
+
+    if (viewAllBtn) viewAllBtn.addEventListener('click', goToBrowseProducts);
+    if (browseProduceBtn) browseProduceBtn.addEventListener('click', goToBrowseProducts);
+
+    // Initial load of the icon status
+    updateCartIcon();
 });
+
+// --- 5. Helper Functions (Outside the listener so they are globally accessible) ---
+function updateCartIcon() {
+    const cart = JSON.parse(localStorage.getItem('agriCart')) || [];
+    const badge = document.getElementById('cart-badge');
+    const cartIcon = document.querySelector('a[href="pages/cart.html"]'); 
+
+    if (badge) {
+        badge.innerText = cart.length;
+        badge.classList.toggle('hidden', cart.length === 0);
+    }
+
+    if (cartIcon) {
+        cartIcon.style.transform = 'scale(1.2)';
+        setTimeout(() => cartIcon.style.transform = 'scale(1)', 200);
+    }
+}
