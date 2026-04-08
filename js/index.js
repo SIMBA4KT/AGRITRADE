@@ -102,3 +102,32 @@ function updateCartIcon() {
         setTimeout(() => cartIcon.style.transform = 'scale(1)', 200);
     }
 }
+// --- Add to Cart Logic for the Detail Page ---
+const addToCartBtn = document.getElementById("addToCartBtn");
+
+if (addToCartBtn) {
+    addToCartBtn.addEventListener("click", () => {
+        // 1. Prepare the product object
+        const productToSave = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image
+        };
+
+        // 2. Retrieve existing cart
+        let cart = JSON.parse(localStorage.getItem('agriCart')) || [];
+
+        // 3. Add and Save
+        cart.push(productToSave);
+        localStorage.setItem('agriCart', JSON.stringify(cart));
+
+        // 4. Feedback
+        alert(`🛒 ${product.name} has been added to your cart!`);
+        
+        // Update the badge if you have the helper function available
+        if (typeof updateCartIcon === "function") {
+            updateCartIcon();
+        }
+    });
+}

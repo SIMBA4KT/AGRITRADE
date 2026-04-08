@@ -30,3 +30,9 @@ Authentication: Secure Google & Email/Password login.
 Storage: Image hosting for produce and profile photos.
 
 Deployment: Vercel
+
+Stripe Integration:
+- Copy `.env.example` to `.env` and set your `STRIPE_SECRET_KEY`.
+- Run `npm install` in the project root.
+- Start the backend with `npm start`.
+- Open the site through a local HTTP server (e.g. Live Server) and use the cart checkout button to test Stripe.

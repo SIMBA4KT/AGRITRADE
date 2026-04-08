@@ -46,3 +46,34 @@ function removeItem(index) {
 }
 
 displayCart();
+
+document.getElementById('checkout-btn').addEventListener('click', async () => {
+    const cart = JSON.parse(localStorage.getItem('agriCart')) || [];
+    if (cart.length === 0) {
+        alert('Your cart is empty. Add some products before checkout.');
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:3000/create-checkout-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: cart })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Stripe checkout session failed');
+        }
+
+        const { url } = await response.json();
+        if (!url) {
+            throw new Error('No checkout URL returned from server.');
+        }
+
+        window.location.href = url; // Redirect to Stripe!
+    } catch (err) {
+        console.error('Checkout error:', err);
+        alert('Unable to start Stripe checkout. Please try again later.');
+    }
+});
