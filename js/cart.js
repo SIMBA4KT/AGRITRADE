@@ -1,13 +1,48 @@
-const badge = document.getElementById('cart-badge');
-let count = 0;
+const container = document.getElementById('cart-items-container');
+const totalEl = document.getElementById('total-price');
 
-function addToCart() {
-  count++;
-  badge.innerText = count;
-  
-  if (count > 0) badge.classList.remove('hidden');
+function displayCart() {
+    const cart = JSON.parse(localStorage.getItem('agriCart')) || [];
+    
+    container.innerHTML = '';
+    let total = 0;
 
-  // Add pop effect
-  badge.classList.add('pop');
-  setTimeout(() => badge.classList.remove('pop'), 100);
+    if (cart.length === 0) {
+        container.innerHTML = '<p class="empty-msg">Your basket is empty. <a href="../index.html">Go pick some.</a></p>';
+        totalEl.innerText = "0";
+        return;
+    }
+
+    // 3. Loop through each product in the cart and display 
+    cart.forEach((product, index) => {
+        total += product.price;
+
+        container.innerHTML += `
+            <div class="cart-item">
+                <img src="../${product.image}" alt="${product.name}">
+                
+                <div class="cart-item-info">
+                    <h3>${product.name}</h3>
+                    <p>Price: KES ${product.price}</p>
+                    <p style="font-size: 0.8rem; color: #666;">Category: Fresh Produce</p>
+                </div>
+
+                <button class="remove-btn" onclick="removeItem(${index})">
+                    Remove
+                </button>
+            </div>
+        `;
+    });
+
+
+    totalEl.innerText = total.toLocaleString(); 
 }
+
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem('agriCart'));
+    cart.splice(index, 1); 
+    localStorage.setItem('agriCart', JSON.stringify(cart)); 
+    displayCart();
+}
+
+displayCart();

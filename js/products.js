@@ -119,4 +119,25 @@ document.addEventListener("DOMContentLoaded", async () => {
             recommendedContainer.innerHTML = "<p>No similar products available.</p>";
         }
     }
+
+    const addToCartBtn = document.getElementById("addToCartBtn");
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener("click", () => {
+            const productToSave = {
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                image: product.image
+            };
+
+            let cart = JSON.parse(localStorage.getItem('agriCart')) || [];
+            cart.push(productToSave);
+            localStorage.setItem('agriCart', JSON.stringify(cart));
+
+            alert(`🛒 ${product.name} has been added to your cart!`);
+            if (typeof updateCartIcon === "function") {
+                updateCartIcon();
+            }
+        });
+    }
 });
