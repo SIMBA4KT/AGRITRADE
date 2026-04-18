@@ -99,6 +99,37 @@
         font-size: 0.9rem;
     }
 
+    /* Responsive Footer */
+    @media (max-width: 900px) {
+        .footer-container {
+            grid-template-rows: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .main-footer {
+            padding: 40px 10px 20px;
+        }
+
+        .footer-container {
+            padding: 0 10px;
+            gap: 20px;
+        }
+
+        .footer-column h3 {
+            font-size: 1rem;
+        }
+
+        .footer-logo {
+            font-size: 1.4rem;
+        }
+
+        .footer-bottom {
+            font-size: 0.8rem;
+        }
+    }
+
     .social-link:hover {
         color: #03a14a;
     }

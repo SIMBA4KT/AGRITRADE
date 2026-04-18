@@ -55,7 +55,7 @@ document.getElementById('checkout-btn').addEventListener('click', async () => {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/create-checkout-session', {
+        const response = await fetch('/api/create-checkout-session', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ items: cart })

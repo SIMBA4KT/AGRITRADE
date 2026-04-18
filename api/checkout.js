@@ -54,4 +54,11 @@ app.post('/create-checkout-session', async (req, res) => {
     }
 });
 
+if (require.main === module) {
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {
+        console.log(`Stripe checkout API listening on port ${port}`);
+    });
+}
+
 module.exports = app;
