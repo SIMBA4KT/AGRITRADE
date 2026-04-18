@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/Checkout.js",
+      "src": "api/checkout.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/Checkout.js"
+      "dest": "/api/checkout.js"
     },
     {
       "src": "/(.*)",

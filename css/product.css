@@ -251,11 +251,82 @@ body {
         align-items: center;
     }
 
+    .product-image,
+    .product-info {
+        width: 100%;
+    }
+
     .product-info {
         align-items: center;
         text-align: center;
     }
+
+    .back-btn {
+        width: auto;
+        padding: 10px 14px;
+    }
+
+    #reviewForm input,
+    #reviewForm textarea,
+    #reviewForm select {
+        max-width: 100%;
+    }
 }
+
+@media (max-width: 600px) {
+    .product-detail {
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .browseProducts-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px 20px;
+    }
+
+    .browseProducts-header h1 {
+        font-size: 22px;
+    }
+
+    .browseProducts-header ul {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .product-image img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product-info h2 {
+        font-size: 24px;
+    }
+
+    .product-info .price,
+    .product-info .category,
+    .product-info .delivery,
+    .product-info .description {
+        font-size: 14px;
+    }
+
+    .cart-btn,
+    #reviewForm button {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .product-reviews,
+    .product-detail {
+        padding: 15px;
+    }
+
+    #recommendedProducts {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+}
+
 .scroll-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

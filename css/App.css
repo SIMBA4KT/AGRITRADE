@@ -297,3 +297,170 @@ header {
 .image-card:hover .card-overlay {
   background: rgba(40, 167, 69, 0.95);
 }
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .market-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+}
+
+@media (max-width: 900px) {
+  .header-container {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .header1 {
+    font-size: 1.5rem;
+    order: 1;
+    flex: 1;
+  }
+  
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+    gap: 1rem;
+    font-size: 12px;
+  }
+  
+  .nav-links a {
+    padding: 8px 16px;
+  }
+  
+  .search-container {
+    order: 2;
+    margin: 0;
+  }
+  
+  .search-input {
+    width: 120px;
+  }
+  
+  .header-icons {
+    order: 4;
+  }
+  
+  .market-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0 10px;
+  }
+  
+  .image-card {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .header2 {
+    font-size: 1.2rem;
+    margin-left: 20px;
+    margin-top: -350px;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    gap: 1rem;
+    margin-left: 20px;
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .leaf-dropdown {
+    order: 1;
+  }
+  
+  .header1 {
+    order: 2;
+    font-size: 1.3rem;
+    margin: 0;
+  }
+  
+  .search-container {
+    order: 3;
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+  
+  .search-input {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .nav-links {
+    order: 4;
+    width: 100%;
+    justify-content: space-around;
+    gap: 0.5rem;
+    font-size: 11px;
+  }
+  
+  .nav-links a {
+    padding: 6px 12px;
+  }
+  
+  .header-icons {
+    order: 5;
+    align-self: flex-end;
+  }
+  
+  .market-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .image-card {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  
+  .header2 {
+    font-size: 1rem;
+    margin-left: 10px;
+    margin-top: -320px;
+    text-align: center;
+  }
+  
+  .about {
+    font-size: 1rem;
+    margin: 20px 10px;
+  }
+  
+  .cta-buttons {
+    margin-left: 10px;
+    margin-top: 30px;
+  }
+  
+  .Product-category {
+    font-size: 24px;
+    margin-left: 10px;
+    margin-top: 100px;
+  }
+  
+  .Product-category2 {
+    font-size: 24px;
+    margin-left: 10px;
+  }
+  
+  .Featured {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+  
+  .view-all-btn {
+    align-self: flex-end;
+    margin-top: 10px;
+  }
+}

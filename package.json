@@ -2,9 +2,9 @@
   "name": "agritrade-website",
   "version": "1.0.0",
   "description": "AgriTrade website with Stripe checkout integration",
-  "main": "api/Checkout.js",
+  "main": "api/checkout.js",
   "scripts": {
-    "start": "node js/Checkout.js"
+    "start": "node api/checkout.js"
   },
   "dependencies": {
     "cors": "^2.8.6",
