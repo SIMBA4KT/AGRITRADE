@@ -58,6 +58,8 @@ const createCheckoutSession = async (req, res) => {
 
 app.post("/create-checkout-session", createCheckoutSession);
 app.post("/api/create-checkout-session", createCheckoutSession);
+/** When this file is invoked as `/api/checkout`, Vercel may present the path as `/`. */
+app.post("/", createCheckoutSession);
 
 if (require.main === module) {
   const port = process.env.PORT || 3000;
