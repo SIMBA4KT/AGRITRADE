@@ -5,11 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review Your Order - AgriTrade</title>
     <link rel="stylesheet" href="../css/cart.css">
+    <style>
+        /* Small addition for loading UI */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
+<!-- 1. Loading Overlay for when Stripe is redirecting -->
+<div id="loading-overlay" class="loading-overlay">Redirecting to Secure Payment...</div>
+
 <div class="cart-page-container">
-    <h1>Review Your Order</h1>
+    <div class="header-row" style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>Review Your Order</h1>
+        <!-- 2. Small UI hint to show who is logged in -->
+        <div id="user-status" style="font-size: 0.9rem; color: #666;"></div>
+    </div>
     
     <div id="cart-items-container"></div>
 
@@ -26,6 +46,16 @@
     </div>
 </div>
 
+<!-- 3. Critical: Load Auth first so cart.js can check the session -->
+<script src="../js/services/auth.js"></script>
 <script src="../js/cart.js"></script>
+
+<script>
+    // Simple UI helper to show the username if logged in
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user) {
+        document.getElementById('user-status').innerText = `Logged in as: ${user.username}`;
+    }
+</script>
 </body>
 </html>
