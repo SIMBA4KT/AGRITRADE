@@ -1,114 +1,20 @@
-const container = document.getElementById("cart-items-container");
-const totalEl = document.getElementById("total-price");
-
-function displayCart() {
-  const cart = JSON.parse(localStorage.getItem("agriCart")) || [];
-
-  container.innerHTML = "";
-  let total = 0;
-
-  if (cart.length === 0) {
-    container.innerHTML =
-      '<p class="empty-msg">Your basket is empty. <a href="../index.html">Go pick some produce.</a></p>';
-    totalEl.innerText = "0";
-    return;
-  }
-
-  cart.forEach((product, index) => {
-    total += product.price;
-
-    container.innerHTML += `
-            <div class="cart-item">
-                <img src="../${product.image}" alt="${product.name}">
-                
-                <div class="cart-item-info">
-                    <h3>${product.name}</h3>
-                    <p>Price: KES ${product.price.toLocaleString()}</p>
-                    <p style="font-size: 0.8rem; color: #666;">Category: Fresh Produce</p>
-                </div>
-
-                <button class="remove-btn" onclick="removeItem(${index})">
-                    Remove
-                </button>
-            </div>
-        `;
-  });
-
-  totalEl.innerText = total.toLocaleString();
-}
-
-window.removeItem = function(index) {
-  let cart = JSON.parse(localStorage.getItem("agriCart")) || [];
-  cart.splice(index, 1);
-  localStorage.setItem("agriCart", JSON.stringify(cart));
-  displayCart();
-};
-
-function getCheckoutSessionUrl() {
-  const host = window.location.hostname;
-  if (host === "localhost" || host === "127.0.0.1") {
-    return "http://127.0.0.1:3000/create-checkout-session";
-  }
-  return "/api/create-checkout-session";
-}
-
-async function parseJsonResponse(response) {
-  const text = await response.text();
-  if (!text) return {};
-  try {
-    return JSON.parse(text);
-  } catch {
-    throw new Error(`Unexpected response (${response.status})`);
-  }
-}
-
-document.getElementById("checkout-btn").addEventListener("click", async () => {
-  const cart = JSON.parse(localStorage.getItem("agriCart")) || [];
-  
-
-  if (cart.length === 0) {
-    alert("Your cart is empty. Add some products before checkout.");
-    return;
-  }
-  
-  const currentUserData = localStorage.getItem('currentUser');
-  if (!currentUserData) {
-    alert("You must be logged in to complete your payment.");
+<!-- cart.html -->
+<div class="cart-summary">
+    <div class="total-info">
+        <p>Total Amount</p>
+        <h3>KES <span id="total-price">0</span></h3>
+    </div>
     
-    window.location.href = "login.html"; 
-    return; 
-  }
+    <!-- AUTH GATE FORM: Hidden by default -->
+    <div id="payment-auth-form" style="display:none; margin: 15px 0; border-top: 1px solid #eee; pt: 10px;">
+        <p style="font-size: 0.85rem; color: #444; margin-bottom: 8px;">Please verify your account to pay:</p>
+        <input type="text" id="pay-username" placeholder="Username" style="width:100%; margin-bottom:8px; padding:10px; border:1px solid #ddd; border-radius:4px;">
+        <input type="password" id="pay-password" placeholder="Password" style="width:100%; margin-bottom:8px; padding:10px; border:1px solid #ddd; border-radius:4px;">
+    </div>
+    
+    <button id="checkout-btn" class="checkout-btn">Proceed to Payment</button>
+</div>
 
-  const user = JSON.parse(currentUserData);
-
-  
-  try {
-    const response = await fetch(getCheckoutSessionUrl(), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        items: cart,
-        customerEmail: user.username 
-      }),
-    });
-
-    const data = await parseJsonResponse(response);
-
-    if (!response.ok) {
-      throw new Error(data.error || "Stripe checkout session failed");
-    }
-
-    if (!data.url) {
-      throw new Error("No checkout URL returned from server.");
-    }
-
-
-    window.location.href = data.url; 
-
-  } catch (err) {
-    console.error("Checkout error:", err);
-    alert("Unable to start Stripe checkout. Please try again later.");
-  }
-});
-
-displayCart();
+<!-- Load Auth Service First -->
+<script src="../js/services/auth.js"></script>
+<script src="../js/cart.js"></script>
