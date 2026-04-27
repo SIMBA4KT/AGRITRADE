@@ -50,15 +50,15 @@ document.getElementById("checkout-btn").addEventListener("click", async (e) => {
   const checkoutBtn = document.getElementById("checkout-btn");
   const errorHint = document.getElementById("auth-error");
 
-  // --- STEP 1: Show Auth Form if hidden ---
+
   if (window.getComputedStyle(authGate).display === "none") {
     authGate.style.display = "block";
     checkoutBtn.innerText = "Verify & Pay with Stripe";
-    checkoutBtn.style.backgroundColor = "#28a745"; // Success green color
+    checkoutBtn.style.backgroundColor = "#28a745"; 
     return;
   }
 
-  // --- STEP 2: Validate Credentials ---
+  
   const userVal = document.getElementById("auth-username").value.trim();
   const passVal = document.getElementById("auth-password").value.trim();
   
@@ -70,7 +70,7 @@ document.getElementById("checkout-btn").addEventListener("click", async (e) => {
     return;
   }
 
-  // --- STEP 3: Proceed to Stripe ---
+
   try {
     errorHint.style.display = "none";
     checkoutBtn.disabled = true;
