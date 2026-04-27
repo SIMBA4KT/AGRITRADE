@@ -54,7 +54,7 @@ function handleAuth(type) {
             updateMessage(display, "Invalid credentials.", "red");
         }
     }
-}
+};
 
 // Helper to keep code clean
 function updateMessage(el, text, color) {
@@ -62,4 +62,17 @@ function updateMessage(el, text, color) {
         el.innerText = text;
         el.style.color = color;
     }
+};
+
+if (foundClient) {
+    localStorage.setItem('currentUser', JSON.stringify(foundClient));
+    updateMessage(display, "Success! Returning to checkout...", "green");
+
+    setTimeout(() => {
+        if (document.referrer.includes('cart.html') || document.referrer.includes('checkout.html')) {
+            window.history.back(); 
+        } else {
+            window.location.href = '../../index.html';
+        }
+    }, 1000);
 }
