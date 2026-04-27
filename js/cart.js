@@ -9,12 +9,11 @@ function displayCart() {
 
   if (cart.length === 0) {
     container.innerHTML =
-      '<p class="empty-msg">Your basket is empty. <a href="../index.html">Go pick some.</a></p>';
+      '<p class="empty-msg">Your basket is empty. <a href="../index.html">Go pick some produce.</a></p>';
     totalEl.innerText = "0";
     return;
   }
 
-  // 3. Loop through each product in the cart and display
   cart.forEach((product, index) => {
     total += product.price;
 
@@ -24,7 +23,7 @@ function displayCart() {
                 
                 <div class="cart-item-info">
                     <h3>${product.name}</h3>
-                    <p>Price: KES ${product.price}</p>
+                    <p>Price: KES ${product.price.toLocaleString()}</p>
                     <p style="font-size: 0.8rem; color: #666;">Category: Fresh Produce</p>
                 </div>
 
@@ -38,16 +37,13 @@ function displayCart() {
   totalEl.innerText = total.toLocaleString();
 }
 
-function removeItem(index) {
-  let cart = JSON.parse(localStorage.getItem("agriCart"));
+window.removeItem = function(index) {
+  let cart = JSON.parse(localStorage.getItem("agriCart")) || [];
   cart.splice(index, 1);
   localStorage.setItem("agriCart", JSON.stringify(cart));
   displayCart();
-}
+};
 
-displayCart();
-
-/** Local static servers (e.g. Live Server) cannot handle POST; the Stripe API runs via `npm start` (port 3000). */
 function getCheckoutSessionUrl() {
   const host = window.location.hostname;
   if (host === "localhost" || host === "127.0.0.1") {
@@ -68,16 +64,32 @@ async function parseJsonResponse(response) {
 
 document.getElementById("checkout-btn").addEventListener("click", async () => {
   const cart = JSON.parse(localStorage.getItem("agriCart")) || [];
+  
+
   if (cart.length === 0) {
     alert("Your cart is empty. Add some products before checkout.");
     return;
   }
+  
+  const currentUserData = localStorage.getItem('currentUser');
+  if (!currentUserData) {
+    alert("You must be logged in to complete your payment.");
+    
+    window.location.href = "login.html"; 
+    return; 
+  }
 
+  const user = JSON.parse(currentUserData);
+
+  
   try {
     const response = await fetch(getCheckoutSessionUrl(), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: cart }),
+      body: JSON.stringify({ 
+        items: cart,
+        customerEmail: user.username 
+      }),
     });
 
     const data = await parseJsonResponse(response);
@@ -86,15 +98,17 @@ document.getElementById("checkout-btn").addEventListener("click", async () => {
       throw new Error(data.error || "Stripe checkout session failed");
     }
 
-    const { url } = data;
-    if (!url) {
+    if (!data.url) {
       throw new Error("No checkout URL returned from server.");
     }
 
-    window.location.href = url; // Redirect to Stripe!
+
+    window.location.href = data.url; 
+
   } catch (err) {
     console.error("Checkout error:", err);
-    console.log(err);
     alert("Unable to start Stripe checkout. Please try again later.");
   }
 });
+
+displayCart();
