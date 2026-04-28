@@ -1,7 +1,10 @@
 const container = document.getElementById('cart-items-container');
 const totalEl = document.getElementById('total-price');
+const checkoutBtn = document.getElementById('checkout-btn');
 
 function displayCart() {
+    if (!container || !totalEl) return;
+
     const cart = JSON.parse(localStorage.getItem('agriCart')) || [];
     
     container.innerHTML = '';
@@ -47,8 +50,9 @@ function removeItem(index) {
 
 displayCart();
 
-document.getElementById('checkout-btn').addEventListener('click', async () => {
-    const cart = JSON.parse(localStorage.getItem('agriCart')) || [];
+if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', async () => {
+        const cart = JSON.parse(localStorage.getItem('agriCart')) || [];
     if (cart.length === 0) {
         alert('Your cart is empty. Add some products before checkout.');
         return;

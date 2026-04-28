@@ -1,4 +1,4 @@
-// Initializing clients from storage 
+// Aquiring clients from storage 
 let clients = JSON.parse(localStorage.getItem('userList')) || [];
 
 window.onload = function() {
@@ -6,7 +6,6 @@ window.onload = function() {
     const savedAccount = JSON.parse(localStorage.getItem('userAccount'));
     const usernameInput = document.getElementById('username');
 
-    // Check if we have a "last logged in" hint
     if (savedAccount && usernameInput) {
         usernameInput.value = savedAccount.username;
         if (display) display.innerText = `Welcome back, ${savedAccount.username}!`;
@@ -40,13 +39,11 @@ function handleAuth(type) {
         const foundClient = clients.find(u => u.username === user && u.password === pass);
 
         if (foundClient) {
-            // Save session
             localStorage.setItem('currentUser', JSON.stringify(foundClient));
             localStorage.setItem('userAccount', JSON.stringify({ username: user }));
             
             updateMessage(display, `Logging you in, ${user}...`, "blue");
             
-            // Redirect to marketplace after 1 second
             setTimeout(() => {
                 window.location.href = '../index.html'; 
             }, 1000);
@@ -56,12 +53,11 @@ function handleAuth(type) {
     }
 }
 
-// Sign up function
 function signUp() {
     handleAuth('signup');
 }
 
-// Helper to keep code clean
+// To keep code clean
 function updateMessage(el, text, color) {
     if (el) {
         el.innerText = text;
@@ -87,7 +83,6 @@ function handleProfileClick() {
     if (!currentUser) {
         window.location.href = 'pages/register.html';
     }
-    // If logged in, do nothing since username is already displayed
 }
 
 // Toggle profile dropdown
@@ -96,10 +91,8 @@ function toggleProfileDropdown() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     
     if (!currentUser) {
-        // If not logged in, redirect to register
         window.location.href = 'pages/register.html';
     } else {
-        // If logged in, toggle dropdown
         if (dropdown) {
             dropdown.classList.toggle('hidden');
         }
@@ -108,7 +101,6 @@ function toggleProfileDropdown() {
 
 // Logout function
 function logout() {
-    // Clear session data
     localStorage.removeItem('currentUser');
     localStorage.removeItem('userAccount');
     
@@ -118,7 +110,6 @@ function logout() {
         dropdown.classList.add('hidden');
     }
     
-    // Update profile display
     updateProfileDisplay();
 }
 
