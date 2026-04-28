@@ -56,6 +56,11 @@ function handleAuth(type) {
     }
 }
 
+// Sign up function
+function signUp() {
+    handleAuth('signup');
+}
+
 // Helper to keep code clean
 function updateMessage(el, text, color) {
     if (el) {
@@ -63,3 +68,69 @@ function updateMessage(el, text, color) {
         el.style.color = color;
     }
 }
+
+// Profile functions
+function updateProfileDisplay() {
+    const profileBtn = document.querySelector('.profile-btn');
+    if (profileBtn) {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+            profileBtn.innerHTML = `👤 <span class="username">${currentUser.username.toUpperCase()}</span>`;
+        } else {
+            profileBtn.innerHTML = '👤';
+        }
+    }
+}
+
+function handleProfileClick() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) {
+        window.location.href = 'pages/register.html';
+    }
+    // If logged in, do nothing since username is already displayed
+}
+
+// Toggle profile dropdown
+function toggleProfileDropdown() {
+    const dropdown = document.getElementById('profileDropdown');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (!currentUser) {
+        // If not logged in, redirect to register
+        window.location.href = 'pages/register.html';
+    } else {
+        // If logged in, toggle dropdown
+        if (dropdown) {
+            dropdown.classList.toggle('hidden');
+        }
+    }
+}
+
+// Logout function
+function logout() {
+    // Clear session data
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('userAccount');
+    
+    // Close dropdown
+    const dropdown = document.getElementById('profileDropdown');
+    if (dropdown) {
+        dropdown.classList.add('hidden');
+    }
+    
+    // Update profile display
+    updateProfileDisplay();
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const profileContainer = document.querySelector('.profile-container');
+    const dropdown = document.getElementById('profileDropdown');
+    
+    if (profileContainer && dropdown && !profileContainer.contains(event.target)) {
+        dropdown.classList.add('hidden');
+    }
+});
+
+// Update profile on page load
+document.addEventListener('DOMContentLoaded', updateProfileDisplay);
