@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="css/testimonials.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/cart-icon.css">
+    <script>
+    (function() {
+        const currentUser = localStorage.getItem('currentUser');
+        if (!currentUser) {
+            window.location.href = 'pages/login.html'; 
+        }
+    })();
+</script>
 </head>
 <body>
     <header>
@@ -36,13 +44,7 @@
             <div class="header-icons">
             <a href="pages/cart.html" class="icon-link" title="Cart">
              🛒<span id="cart-badge" class="badge hidden">0</span></a>
-                <div class="profile-container">
-                    <button class="profile-btn" onclick="toggleProfileDropdown()" title="Profile">👤</button>
-                    <div class="profile-dropdown hidden" id="profileDropdown">
-                        <a href="pages/sellProduce.html">Join as Farmer</a>
-                        <button onclick="logout()">Log Out</button>
-                    </div>
-                </div>
+                <a href="#Profile" class="icon-link" title="Profile">👤</a>
             </div>
         </div>
     </header>
@@ -258,9 +260,8 @@
         <p>&copy; 2026 AGRITRADE - All Rights Reserved.</p>
     </div>
 </footer>
-    <script src="js/index.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/main.js"></script>
-</body>  
+    <script type="module" src="js/index.js"></script>
+    <script type="module" src="js/cart.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
 </html>
