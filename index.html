@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGRITRADE - A home of farmers</title>
-    <link rel="stylesheet" href="css/App.css">
+    <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/product.css">
     <link rel="stylesheet" href="css/testimonials.css">
     <link rel="stylesheet" href="css/style.css">
@@ -36,7 +36,13 @@
             <div class="header-icons">
             <a href="pages/cart.html" class="icon-link" title="Cart">
              🛒<span id="cart-badge" class="badge hidden">0</span></a>
-                <a href="#Profile" class="icon-link" title="Profile">👤</a>
+                <div class="profile-container">
+                    <button class="profile-btn" onclick="toggleProfileDropdown()" title="Profile">👤</button>
+                    <div class="profile-dropdown hidden" id="profileDropdown">
+                        <a href="pages/sellProduce.html">Join as Farmer</a>
+                        <button onclick="logout()">Log Out</button>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -252,8 +258,9 @@
         <p>&copy; 2026 AGRITRADE - All Rights Reserved.</p>
     </div>
 </footer>
-    <script type="module" src="js/index.js"></script>
-    <script type="module" src="js/cart.js"></script>
-    <script type="module" src="js/main.js"></script>
-</body>
+    <script src="js/index.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+</body>  
 </html>
